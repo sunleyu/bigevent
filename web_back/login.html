@@ -68,21 +68,25 @@
       var password = $("#password").val();
       // console.log(uesr_name,password);
       if (username == "" || password == "") {
-        alert("用户名和密码不能为空");
-        return;
+        $('#pResult').html('用户名和密码不能为空！');
+        $('.modal').modal('show');
+       
+      } else {
+        $.post(URLIST.user_login, {
+          user_name: username,
+          password: password
+        }, function (res) {
+          if (res.code == 200) {
+            // alert(res.msg);
+            window.location.href = "./index.html"
+          } else {
+            // alert(res.msg);
+            $('.modal').modal('show');
+            $('#pResult').html(res.msg);
 
+          }
+        })
       }
-      $.post(URLIST.user_login, {
-        user_name: username,
-        password: password
-      }, function (res) {
-        if(res.code==200){
-          // alert(res.msg);
-          window.location.href="./index.html"
-        }else{
-          alert(res.msg);
-        }
-      })
 
     })
 
