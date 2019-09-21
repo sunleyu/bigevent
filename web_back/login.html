@@ -70,12 +70,9 @@
       if (username == "" || password == "") {
         $('#pResult').html('用户名和密码不能为空！');
         $('.modal').modal('show');
-       
+
       } else {
-        $.post(URLIST.user_login, {
-          user_name: username,
-          password: password
-        }, function (res) {
+        USER.user_login(username, password, function (res) {
           if (res.code == 200) {
             // alert(res.msg);
             window.location.href = "./index.html"
@@ -89,19 +86,6 @@
       }
 
     })
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

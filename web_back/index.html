@@ -158,7 +158,7 @@
     //退出功能
     $("#btnLogout").click(function () {
       if (window.confirm('确定要退出吗？')) {
-        $.post(URLIST.user_logout, function (res) {
+        USER.user_logout(function (res) {
           if (res.code == 200) {
             // alert(res.msg);
             window.location.href = './login.html';
@@ -168,8 +168,7 @@
     });
     //登录获取用户信息显示
     $(function () {
-
-      $.get(URLIST.user_info, function (res) {
+      USER.user_info(function (res) {
         console.log(res);
 
         if (res.code === 200) {
@@ -178,7 +177,8 @@
           $("#userImg").prop("src", res.data.user_pic);
           $("#grpic").prop("src", res.data.user_pic);
         }
-      });
+      })
+
     });
   </script>
 

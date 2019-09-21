@@ -1,4 +1,24 @@
-
+var USER={
+  user_login:function(username,password,callback){
+    $.post(URLIST.user_login, {
+      user_name: username,
+      password: password
+    }, function (res) {
+      callback(res)
+    });
+  },
+  user_logout:function(callback){
+    $.post(URLIST.user_logout, function (res) {
+     callback(res);
+    })
+  },
+  user_info:function(callback){
+    $.get(URLIST.user_info, function (res) {
+      callback(res);
+     })
+  }
+    
+}
 
 
 
