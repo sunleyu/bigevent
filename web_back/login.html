@@ -72,7 +72,7 @@
         return;
 
       }
-      $.post("http://localhost:8000/admin/login", {
+      $.post(URLIST.user_login, {
         user_name: username,
         password: password
       }, function (res) {

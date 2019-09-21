@@ -157,7 +157,7 @@
   <script>
     //退出功能
     $("#btnLogout").click(function () {
-      $.post("http://localhost:8000/admin/logout", function (res) {
+      $.post(URLIST.user_logout, function (res) {
         if (res.code == 200) {
           // alert(res.msg);
           window.location.href = './login.html';
@@ -167,7 +167,7 @@
     //登录获取用户信息显示
     $(function () {
 
-      $.get("http://localhost:8000/admin/getuser", function (res) {
+      $.get(URLIST.user_info, function (res) {
         console.log(res);
         if (res.code === 200) {
           
