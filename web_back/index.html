@@ -157,20 +157,23 @@
   <script>
     //退出功能
     $("#btnLogout").click(function () {
-      $.post(URLIST.user_logout, function (res) {
-        if (res.code == 200) {
-          // alert(res.msg);
-          window.location.href = './login.html';
-        }
-      })
+      if (window.confirm('确定要退出吗？')) {
+        $.post(URLIST.user_logout, function (res) {
+          if (res.code == 200) {
+            // alert(res.msg);
+            window.location.href = './login.html';
+          }
+        })
+      }
     });
     //登录获取用户信息显示
     $(function () {
 
       $.get(URLIST.user_info, function (res) {
         console.log(res);
+
         if (res.code === 200) {
-          
+
           $("#userName").html(res.data.nickname);
           $("#userImg").prop("src", res.data.user_pic);
           $("#grpic").prop("src", res.data.user_pic);
