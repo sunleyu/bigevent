@@ -58,7 +58,7 @@
   <script src="./js/utils/user.js"></script>
 
   <script>
-    // 思路
+    // 登录功能思路
     // 给按钮添加点击事件
     // 1. 收集用户的信息，进行简单的判断
     // 2. ajax请求
@@ -77,8 +77,8 @@
         password: password
       }, function (res) {
         if(res.code==200){
-          alert(res.msg);
-          // window.location.href="./index.html"
+          // alert(res.msg);
+          window.location.href="./index.html"
         }else{
           alert(res.msg);
         }
