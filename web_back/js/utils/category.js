@@ -14,5 +14,13 @@ var category = {
             callback(res);
 
         })
+    },
+    del: function (id,callback) {
+        $.post(Category.category_del, {id:id
+
+        }, function (res) {
+            callback(res);
+
+        })
     }
 }

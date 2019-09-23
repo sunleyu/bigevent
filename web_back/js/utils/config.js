@@ -10,4 +10,5 @@ var URLIST = {
 var Category={
   category_add:BASE_URL+"/admin/category_add",
   category_show:BASE_URL + '/admin/category_search',
+  category_del:BASE_URL + '/admin/category_delete',
 }
