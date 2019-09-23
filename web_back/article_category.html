@@ -118,7 +118,8 @@
             <td>{{item.name}}</td>
             <td>{{item.slug}}</td>
             <td class="text-center">
-                <a href='javascript:editTr({"id":"{{item.id}} ","slug":"{{item.slug}} ","name":"{{item.name}}"});' class="btn btn-info btn-xs">编辑</a>
+                <a href='javascript:editTr({"id":"{{item.id}} ","slug":"{{item.slug}} ","name":"{{item.name}}"});'
+                    class="btn btn-info btn-xs">编辑</a>
                 <a href="javascript:deleteTr( {{item.id}} );" class="btn btn-danger btn-xs">删除</a>
             </td>
         </tr>
@@ -128,7 +129,7 @@
         $(".btn-success").click(function () {
             $("#valempty").hide();
         })
-//显示
+        //显示
         function showcatelist() {
             category.show(function (res) {
                 console.log(res);
@@ -138,32 +139,32 @@
         }
         $(function () {
             showcatelist();
-    });
-    //添加分类
-        // $('#model_add').click(function () {
-        //     // alert('add');
-        //     var name = $('#category_name').val();
-        //     var slug = $('#category_slug').val();
-        //     // console.log(name, slug);
-        //     if (name === "" || slug === "") {
-        //         // $("#valempty").text('名字和别名不能为空');
-        //         $("#valempty").show();
-        //         // $('#addModal').modal('show');
-        //     } else {
-        //         category.add(name, slug, function (res) {
-        //             // console.log(res)
-        //             if (res.code === 200) {
-        //                 alert(res.msg);
-        //                 $("#valempty").hide();
-        //                 $('#addModal').modal('hide');
-        //                 showcatelist();
-        //             } else {
-        //                 $("#valempty").show().text(res.msg)
+        });
+        // 添加分类
+        $('#model_add').click(function () {
+            // alert('add');
+            var name = $('#category_name').val();
+            var slug = $('#category_slug').val();
+            // console.log(name, slug);
+            if (name === "" || slug === "") {
+                // $("#valempty").text('名字和别名不能为空');
+                $("#valempty").show();
+                // $('#addModal').modal('show');
+            } else {
+                category.add(name, slug, function (res) {
+                    // console.log(res)
+                    if (res.code === 200) {
+                        // alert(res.msg);
+                        $("#valempty").hide();
+                        $('#addModal').modal('hide');
+                        showcatelist();
+                    } else {
+                        $("#valempty").show().text(res.msg)
 
-        //             }
-        //         })
-        //     }
-        // });
+                    }
+                })
+            }
+        });
     </script>
 
 </body>
