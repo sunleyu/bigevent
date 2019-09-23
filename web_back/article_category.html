@@ -65,6 +65,8 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <input type="hidden" class="form-control" id="category_id" />
+
                         <div class="form-group">
                             <label for="category_name" class="control-label">分类名称:</label>
                             <input type="text" class="form-control" id="category_name">
@@ -125,13 +127,10 @@
         </tr>
         {{/each}}
     </script>
+
+
     <script>
-        $(".btn-success").click(function () {
-            $("#valempty").hide();
-            $('#category_name').val("");
-            $('#category_slug').val("");
-        })
-        //显示
+        //分类列表显示
         function showcatelist() {
             category.show(function (res) {
                 console.log(res);
@@ -142,43 +141,85 @@
         $(function () {
             showcatelist();
         });
-        // 添加分类
+
+        // 添加/编辑分类
+        var status = '新增';
+        $(".btn-success").click(function () {
+            $("#valempty").hide();
+            $('#category_name').val("");
+            $('#category_slug').val("");
+            status = '新增';
+            $('#addModal .modal-title').text('新增分类');
+            $('#addModal #model_add').text('新增');
+            $("#valempty").hide();
+        });
+        //分类编辑
+        function editTr(obj) {
+            $('#addModal').modal('show');
+            $('#addModal .modal-title').text('修改类型');
+            $('#addModal #model_add').text('保存修改');
+            status = '编辑';
+            // 给文本框赋值
+            $('#category_id').val(obj.id); // 隐藏域
+            $('#category_name').val(obj.name);
+            $('#category_slug').val(obj.slug);
+            $("#valempty").hide();
+        }
+        //添加修改点击
         $('#model_add').click(function () {
             // alert('add');
             var name = $('#category_name').val();
             var slug = $('#category_slug').val();
+
             // console.log(name, slug);
+
             if (name === "" || slug === "") {
-                // $("#valempty").text('名字和别名不能为空');
+                $("#valempty").text('名字和别名不能为空');
                 $("#valempty").show();
                 // $('#addModal').modal('show');
             } else {
-                category.add(name, slug, function (res) {
-                    // console.log(res)
-                    if (res.code === 200) {
-                        // alert(res.msg);
-                        $("#valempty").hide();
-                        $('#addModal').modal('hide');
-                        showcatelist();
-                    } else {
-                        $("#valempty").show().text(res.msg)
+                if (status === '新增') {
 
-                    }
-                })
+                    category.add(name, slug, function (res) {
+                        // console.log(res)
+                        if (res.code === 200) {
+                            // alert(res.msg);
+                            // $("#valempty").hide();
+                            $('#addModal').modal('hide');
+                            showcatelist();
+                        } else {
+                            $("#valempty").show().text(res.msg);
+                        }
+                    });
+                } else if (status === '编辑') {
+                    //编辑
+                    var id = $('#category_id').val();
+                    category.edit(id, name, slug, function (res) {
+                        if (res.code === 200) {
+                            // $("#valempty").hide();
+                            $('#addModal').modal('hide');
+                            showcatelist();
+                        } else {
+                            $('#valempty').show().text(res.msg);
+
+                        }
+                    })
+                }
             }
-        });
+        })
 
-        //删除
+
+        //分类删除
         function deleteTr(id) {
             if (window.confirm('你确定要删除吗？')) {
 
                 category.del(id, function (res) {
                     if (res.code === 200) {
                         showcatelist();
-                    }
-                })
-            }
-        }
+                    };
+                });
+            };
+        };
     </script>
 
 </body>

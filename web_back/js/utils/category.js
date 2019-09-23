@@ -22,5 +22,10 @@ var category = {
             callback(res);
 
         })
+    },
+    edit:function(id,name,slug,callback){
+        $.post(Category.category_edit,{id:id,name:name,slug:slug},function(res){
+            callback(res);
+        })
     }
 }
