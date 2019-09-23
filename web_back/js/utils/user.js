@@ -1,4 +1,11 @@
+
 var USER={
+  /**
+   * 
+   * @param {*} username 
+   * @param {*} password 
+   * @param {*} callback 
+   */
   user_login:function(username,password,callback){
     $.post(URLIST.user_login, {
       user_name: username,
@@ -6,7 +13,15 @@ var USER={
     }, function (res) {
       callback(res)
     });
+    // var xhr =new XMLHttpRequest;
+    // xhr.open("post",URLIST.user_login);
+    // xhr.setRequestHeader("content-type","application/x-www-form-urlencoded")
+    // xhr.onload=function(res){
+    //   callback(res.responseTest)
+    // }
+    // xhr.send("user_name="+username+"&password="+password)
   },
+
   user_logout:function(callback){
     $.post(URLIST.user_logout, function (res) {
      callback(res);
