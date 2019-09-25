@@ -13,3 +13,8 @@ var Category={
   category_del:BASE_URL + '/admin/category_delete',
   category_edit:BASE_URL + '/admin/category_edit',
 }
+
+var Article={
+  Article_show:BASE_URL+"/admin/search",
+
+}
