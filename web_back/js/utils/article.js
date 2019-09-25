@@ -5,9 +5,19 @@ var article = {
         });
     },
     publish: function (fd, callback) {
-        $.get(Article.Article_publish, fd, function(res) {
-            callback(res)
-        });
+        // $.post(Article.Article_publish, fd, function(res) {
+        //     callback(res)
+        // });
+        $.ajax({
+            url:Article.Article_publish,
+            type:"post",
+            data:fd,
+            processData: false,
+            contentType: false,
+            success:function(res){
+                callback(res)
+            }
+        })
     },
     del: function(id, callBack) {
         $.get(Article.Article_del, { id: id }, function(res) {
