@@ -101,10 +101,11 @@
             <td class="text-center">{{item.date}}</td>
             <td class="text-center">{{item.state}}</td>
             <td class="text-center">
-                <a href="post-edit.html?id=1002" class="btn btn-default btn-xs">编辑</a>
-                <a href="javascript:deleteTr( 1002 );" class="btn btn-danger btn-xs">删除</a>
+              <a href="article_edit.html" class="btn btn-default btn-xs">编辑</a>
+              <a data-id="{{item.id}}" href="javascript:;" class="btn btn-danger btn-xs del">删除</a>
             </td>
-        </tr>
+          </tr>
+
         {{/each}}
     </script>
 
@@ -126,10 +127,10 @@
         })
     </script>
     <script src="js/utils/config.js"></script>
+    <script src="js/utils/category.js"></script>
     <script src="js/utils/article.js"></script>
     <script src="js/lib/template-web.js"></script>
     <script src="js/lib/jquery.twbsPagination.min.js"></script>
-    <script src="js/utils/category.js"></script>
     <script>
         //文章列表显示
         $(function () {
@@ -161,7 +162,26 @@
                 console.log(type, state);
                 showList();
 
-            })
+            });
+            //删除
+            $('#showBody').on('click', '.del', function () {
+                // console.log(this);
+                if (!window.confirm('确定要删除吗？')) {
+                    return;
+                }
+
+                // 获取之前在模板中生成的自定义属性
+                //   var id = $(this).attr('data-id');
+                var id = $(this).data('id');
+                article.del(id, function (res) {
+                    if (res.code === 200) {
+                        // 删除成功，重新查询
+                        showList();
+                    } else {
+                        alert(res.msg);
+                    }
+                });
+            });
 
             function showList() {
                 article.show({
@@ -174,8 +194,8 @@
                         // console.log(htmlStr);
                         $("#showBody").html(htmlStr);
                         //初始化分页
-                        if(totalPage!=res.totalPage){
-                            totalPage=res.totalPage;
+                        if (totalPage != res.totalPage) {
+                            totalPage = res.totalPage;
                             $('.pagination').twbsPagination('destroy');
                         }
                         $('.pagination').twbsPagination({

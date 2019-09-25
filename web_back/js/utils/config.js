@@ -16,7 +16,7 @@ var Category={
 
 var Article={
   Article_show:BASE_URL+"/admin/search",
-  Article_show:BASE_URL+"/admin/search",
-  Article_show:BASE_URL+"/admin/search",
+  Article_publish:BASE_URL+"/admin/article_publish",
+  Article_del:BASE_URL+"/admin/article_delete",
 
 }
