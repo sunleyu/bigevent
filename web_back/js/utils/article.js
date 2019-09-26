@@ -24,4 +24,17 @@ var article = {
           callBack(res);
         });
       },
+    edit:function(fd,callBack){
+    
+        $.ajax({
+            url:Article.Article_edit,
+            type:"post",
+            data:fd,
+            processData: false,
+            contentType: false,
+            success:function(res){
+                callBack(res)
+            }
+        })
+    }
 }
