@@ -21,3 +21,8 @@ var Article={
   Article_edit:BASE_URL+"/admin/article_edit",
 
 }
+
+var Comment={
+  comment_show:BASE_URL+"/get_comments",
+  comment_add:BASE_URL+"/post_comment",
+}
